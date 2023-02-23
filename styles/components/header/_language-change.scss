@@ -1,0 +1,35 @@
+.custom-select {
+  position: relative;
+  width: 100%;
+  outline: none;
+  &__main {
+    @include flex();
+    user-select: none;
+  }
+  &__items-wrap {
+    background: $white;
+    width: 60px;
+    color: $mainColor;
+    border-radius: 4px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    box-shadow: 0 4px 20px -6px rgb(0 0 0 / 50%);
+    display: none;
+    &.open {
+      display: block;
+    }
+    .custom-select__item {
+      @include flex();
+      user-select: none;
+      padding: 5px 0;
+      font-size: 22px;
+      transition: $transition;
+      &:hover {
+        background-color: rgba(43, 43, 43, 0.2);
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+.nav {
+  @include flex(center, space-between);
+  &__link-item {
+    position: relative;
+    cursor: pointer;
+  }
+  &__link-title {
+    font-size: 20px;
+    line-height: 20px;
+    text-transform: uppercase;
+    font-weight: 300;
+    @include adaptive-value("padding-inline", 20, 10, 1);
+    padding-block: 40px;
+    transition: $transition;
+    display: block;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 0;
+      height: 2px;
+      background-color: #fff;
+      transition: background-color 0.15s;
+    }
+    &:hover {
+      color: $hoverColor;
+      &::before {
+        background-color: $hoverColor;
+      }
+    }
+  }
+  @include media(1205) {
+    flex-direction: column;
+  }
+}
+
+.nav-sub {
+  @include media(1024) {
+    width: 100%;
+    align-self: flex-start;
+    margin-left: 10px;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: $transition;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @include mediaMobileFirst(1024) {
+    position: absolute;
+    min-width: 250px;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 2;
+
+    &__wrap {
+      position: relative;
+      display: flex;
+      padding: 12px;
+      flex-direction: column;
+      margin-top: 5px;
+      background-color: $white;
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    color: #707070;
+    padding: 4px 16px;
+    transition: $transition !important;
+    svg {
+      stroke: #707070;
+    }
+
+    &:hover {
+      padding-left: 30px;
+      color: $mainColor;
+      svg {
+        stroke: $mainColor;
+      }
+    }
+
+    @include media(1024) {
+      padding: 12px 24px;
+    }
+  }
+}
+
+@include mediaMobileFirst(1024) {
+  .nav__link-item:hover .nav-sub {
+    opacity: 1;
+    visibility: visible;
+  }
+}

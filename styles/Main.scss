@@ -1,0 +1,35 @@
+// Default
+@import "./global/normmalize";
+@import "./global/varibles";
+
+// Mixins
+@import "./mixins/mixin";
+@import "./mixins/font";
+
+//Atoms
+@import "./components/atoms/logo";
+
+// Header
+@import "./components/header/header";
+@import "./components/header/nav";
+@import "./components/header/popup";
+@import "./components/header/language-change";
+@import "./components/header/main-search";
+
+// Home
+@import "./components/main-banner/mainBanner";
+@import "./components/new-arrival/newArrival";
+@import "./components/home-main-image/homeMainImage";
+@import "./components/home-news/homeNews";
+
+// Catalog
+@import "./components/catalog/catalog";
+
+// Catalog Filter
+@import "./components/catalog-filter/catalogFilter";
+
+//News
+@import "./components/news/news";
+
+//Footer
+@import "./components/footer/footer";

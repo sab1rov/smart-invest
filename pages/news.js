@@ -1,15 +1,16 @@
+import React from "react";
 import Footer from "../layout/Footer";
-import Head from "../layout/Head";
 import Header from "../layout/Header";
-import HomeMain from "../layout/HomeMain";
+import NewsMain from "../layout/NewsMain";
 
-export default function Home() {
+const News = () => {
   return (
     <div className="wrapper">
-      <Head />
       <Header />
-      <HomeMain />
+      <NewsMain />
       <Footer />
     </div>
   );
-}
+};
+
+export default News;

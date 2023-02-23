@@ -1,0 +1,8 @@
+.main-img {
+  padding-top: 60px;
+  &__image {
+    @include adaptive-value("max-height", 700, 180, 1);
+    width: 100%;
+    object-fit: cover;
+  }
+}

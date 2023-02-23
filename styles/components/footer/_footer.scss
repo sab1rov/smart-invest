@@ -1,0 +1,74 @@
+.footer {
+  //   @include adaptive-value("padding-top", 50, 20, 1);
+  padding-top: 50px;
+  &__wrap {
+    border-top: 0.5px solid #2b2b2b;
+  }
+  &__top {
+    padding: 40px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  &__nav {
+    width: 100%;
+    max-width: 700px;
+    padding: 0 10px;
+    flex-shrink: 0;
+  }
+  &__nav-title {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  &__link {
+    @include flex(flex-start, flex-start);
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .link-item {
+    &__title {
+      font-size: 13px;
+      line-height: 20px;
+    }
+    &__link {
+      font-size: 26px;
+      line-height: 30px;
+      letter-spacing: -0.02em;
+      white-space: normal;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 30px 0;
+    border-top: 1.5px dotted #b7b7b7;
+    text-align: center;
+    @include media(991) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  &__bottom-text {
+    font-size: 14px;
+    line-height: 22px;
+    min-width: 210px;
+    font-weight: 300;
+    &:last-child {
+      a {
+        font-size: 20px;
+        font-weight: 700;
+        margin-left: 10px;
+        span{
+            font-weight: 300;
+        }
+      }
+    }
+  }
+}

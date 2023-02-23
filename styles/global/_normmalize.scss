@@ -1,0 +1,60 @@
+@import "./varibles";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  font-family: $mainFont;
+  color: $mainColor;
+  font-size: 16px;
+  &.show-modal {
+    overflow: hidden;
+  }
+}
+
+.wrapper {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1340px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+html {
+  scroll-behavior: smooth !important;
+}
