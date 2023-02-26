@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 import { LanguageContext } from "../../context/LanguageContext";
 import useLanguage from "../../hooks/useLanguage";
-import { colorData, printData, textileData } from "../../data/index";
-import axios from "axios";
 
 const CatalogItemFilter = () => {
+  const [colorData, setColorData] = useState([]);
+  const [printData, setPrintData] = useState([]);
+  const [fabricData, seFabricrData] = useState([]);
+
   const { language } = useContext(LanguageContext);
   const translate = useLanguage();
-  const urls = [
-    "https://smart-api-v2.main-gate.appx.uz/print",
-    "https://smart-api-v2.main-gate.appx.uz/color",
-    "https://smart-api-v2.main-gate.appx.uz/fabric",
-  ];
-  const requests = urls.map((url) => axios.get(url));
+  const router = useRouter();
+  console.log(router);
 
   const catalog = useRef();
 
@@ -21,25 +21,82 @@ const CatalogItemFilter = () => {
     catalog.current.classList.toggle("show");
   };
 
-  const getData = async () => {
-    const res = await axios.all(requests);
-    // console.log(res.data);
-
-    axios.all(requests).then((responses) => {
-      responses.forEach((resp) => {
-        let msg = {
-          server: resp.headers.server,
-          status: resp.status,
-          fields: Object.keys(resp.data).toString(),
-        };
-        // console.info(resp.config.url);
-        console.log(resp.data);
-      });
-    });
+  const getColorData = async () => {
+    const res = await axios.get("https://smart-api-v2.main-gate.appx.uz/color");
+    setColorData(res.data);
   };
 
+  const getPrintData = async () => {
+    const res = await axios.get("https://smart-api-v2.main-gate.appx.uz/print");
+    setPrintData(res.data);
+  };
+
+  const getFabricData = async () => {
+    const res = await axios.get(
+      "https://smart-api-v2.main-gate.appx.uz/fabric"
+    );
+    seFabricrData(res.data);
+  };
+
+  function handleChangePrint(print) {
+    console.log(print);
+    router.query.print = `${print}`;
+    console.log(...router.query.print);
+    if (router.query.print) {
+      router.push({
+        query: {
+          print: router.query.print
+            .split(",")
+            .filter((item) => item !== print)
+            .join(","),
+          color: router.query.color,
+          fabric: router.query.fabric,
+        },
+      });
+    } else {
+      router.push(router);
+    }
+    // const router = useRouter();
+    // console.log(router.route);
+    // if (router.query?.print) {
+    //   if (router.query.print.indexOf(print) !== -1) {
+    //     router.push({
+    //       pathname: router.route.pathname,
+    //       query: {
+    //         print: router.query.print
+    //           .split(",")
+    //           .filter((item) => item !== print)
+    //           .join(","),
+    //         color: router.query.color,
+    //         fabric: router.query.fabric,
+    //       },
+    //     });
+    //   } else {
+    //     router.push({
+    //       pathname: router.route.pathname,
+    //       query: {
+    //         print: [...router.query.print.split(","), print].join(","),
+    //         color: router.query.color,
+    //         fabric: router.query.fabric,
+    //       },
+    //     });
+    //   }
+    // } else {
+    //   router.push({
+    //     pathname: router.route.pathname,
+    //     query: {
+    //       print,
+    //       color: router.query?.color,
+    //       fabric: router.query?.fabric,
+    //     },
+    //   });
+    // }
+  }
+
   useEffect(() => {
-    getData();
+    getColorData();
+    getFabricData();
+    getPrintData();
   }, []);
 
   return (
@@ -66,16 +123,22 @@ const CatalogItemFilter = () => {
                           <li key={item.id} className="filter-list__item">
                             <label className="checkbox-label">
                               <input
+                                // onClick={(e) => setPath(e)}
                                 type="checkbox"
-                                name="filter-new"
                                 className="checkbox"
+                                onChange={() => handleChangePrint(item?.print)}
+                                checked={
+                                  router.query.print == item.print
+                                    ? true
+                                    : false
+                                }
                               />
                               <span className="checkbox-check"></span>
                               {language == "uz"
-                                ? item?.name_uz
+                                ? item?.print_uz
                                 : language == "ru"
-                                ? item?.name_ru
-                                : item?.name}
+                                ? item?.print_ru
+                                : item?.print}
                             </label>
                           </li>
                         ))}
@@ -94,13 +157,13 @@ const CatalogItemFilter = () => {
                               />
                               <span
                                 className="checkbox-check color"
-                                style={{ background: `${item.name}` }}
+                                style={{ background: `${item.color}` }}
                               ></span>
                               {language == "uz"
-                                ? item?.name_uz
+                                ? item?.color_uz
                                 : language == "ru"
-                                ? item?.name_ru
-                                : item?.name}
+                                ? item?.color_ru
+                                : item?.color}
                             </label>
                           </li>
                         ))}
@@ -111,7 +174,7 @@ const CatalogItemFilter = () => {
                         {translate("textile")}
                       </p>
                       <ul className="filter-list">
-                        {textileData?.map((item) => (
+                        {fabricData?.map((item) => (
                           <li key={item.id} className="filter-list__item">
                             <label className="checkbox-label">
                               <input
@@ -121,10 +184,10 @@ const CatalogItemFilter = () => {
                               />
                               <span className="checkbox-check"></span>
                               {language == "uz"
-                                ? item?.name_uz
+                                ? item?.fabric_uz
                                 : language == "ru"
-                                ? item?.name_ru
-                                : item?.name}
+                                ? item?.fabric_ru
+                                : item?.fabric}
                             </label>
                           </li>
                         ))}
@@ -143,6 +206,3 @@ const CatalogItemFilter = () => {
 };
 
 export default CatalogItemFilter;
-
-
-// hi 
