@@ -21,7 +21,7 @@ function Head() {
       <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
       <link rel="shortcut icon" href="/favicon.ico" />
 
-      <meta property="og:image" content={image} />
+      {/* <meta property="og:image" content={image} /> */}
     </NextHead>
   );
 }

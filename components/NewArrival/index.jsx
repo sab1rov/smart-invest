@@ -28,6 +28,8 @@ const NewArrival = () => {
     getData();
   }, []);
 
+  console.log(data, '#########')
+
   return (
     <section className="new-arrival">
       <div className="container" style={{ overflow: "hidden" }}>
@@ -67,7 +69,7 @@ const NewArrival = () => {
                 },
               }}
             >
-              {data.map((item) => (
+              {data?.products.map((item) => (
                 <SwiperSlide key={item?.id}>
                   <Link
                     href={`catalog/${item.id}`}
