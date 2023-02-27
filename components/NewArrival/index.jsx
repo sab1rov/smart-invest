@@ -69,7 +69,7 @@ const NewArrival = () => {
                 },
               }}
             >
-              {data?.products.map((item) => (
+              {data?.products?.map((item) => (
                 <SwiperSlide key={item?.id}>
                   <Link
                     href={`catalog/${item.id}`}
