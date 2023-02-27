@@ -1,4 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
 import LanguageContextProvider from "../context/LanguageContext";
 
 import "../styles/Main.scss";

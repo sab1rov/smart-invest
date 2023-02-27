@@ -12,7 +12,6 @@ const CatalogItemFilter = () => {
   const { language } = useContext(LanguageContext);
   const translate = useLanguage();
   const router = useRouter();
-  console.log(router);
 
   const catalog = useRef();
 
@@ -38,60 +37,37 @@ const CatalogItemFilter = () => {
     seFabricrData(res.data);
   };
 
-  function handleChangePrint(print) {
-    console.log(print);
-    router.query.print = `${print}`;
-    console.log(...router.query.print);
-    if (router.query.print) {
-      router.push({
-        query: {
-          print: router.query.print
-            .split(",")
-            .filter((item) => item !== print)
-            .join(","),
-          color: router.query.color,
-          fabric: router.query.fabric,
-        },
-      });
+  const includeQueryBoolen = (name, key) =>  {
+    if(router.query[name]) {
+      let arrQuery = router.query[name].split(',')
+      return arrQuery.includes(key)
+
+    }else {
+      return false
+    }
+  }
+
+  function handleChangePrint(key, name ) {
+    if (!!router.query[name]) {
+      let arrQuery = router.query[name].split(',')
+      if(arrQuery.includes(key)) {
+        arrQuery =  arrQuery.filter(item => item !== key) 
+      }else{
+        arrQuery.push(key)
+      }
+      
+      const queryString = arrQuery.join(',')
+      router.query[name] = queryString;
+      router.push(router);
+      
+      
     } else {
+      router.query[name] = key;
       router.push(router);
     }
-    // const router = useRouter();
-    // console.log(router.route);
-    // if (router.query?.print) {
-    //   if (router.query.print.indexOf(print) !== -1) {
-    //     router.push({
-    //       pathname: router.route.pathname,
-    //       query: {
-    //         print: router.query.print
-    //           .split(",")
-    //           .filter((item) => item !== print)
-    //           .join(","),
-    //         color: router.query.color,
-    //         fabric: router.query.fabric,
-    //       },
-    //     });
-    //   } else {
-    //     router.push({
-    //       pathname: router.route.pathname,
-    //       query: {
-    //         print: [...router.query.print.split(","), print].join(","),
-    //         color: router.query.color,
-    //         fabric: router.query.fabric,
-    //       },
-    //     });
-    //   }
-    // } else {
-    //   router.push({
-    //     pathname: router.route.pathname,
-    //     query: {
-    //       print,
-    //       color: router.query?.color,
-    //       fabric: router.query?.fabric,
-    //     },
-    //   });
-    // }
+
   }
+
 
   useEffect(() => {
     getColorData();
@@ -126,11 +102,9 @@ const CatalogItemFilter = () => {
                                 // onClick={(e) => setPath(e)}
                                 type="checkbox"
                                 className="checkbox"
-                                onChange={() => handleChangePrint(item?.print)}
+                                onChange={() => handleChangePrint(item?.print , 'print')}
                                 checked={
-                                  router.query.print == item.print
-                                    ? true
-                                    : false
+                                  includeQueryBoolen('print' , item.print)
                                 }
                               />
                               <span className="checkbox-check"></span>
