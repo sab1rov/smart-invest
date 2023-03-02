@@ -15,11 +15,11 @@ const CatalogItem = () => {
     fetcher
   );
   return (
-    <>
+    <div className="wrapper">
       <Header />
       <CatalogItemFilter />
       <Footer />
-    </>
+    </div>
   );
 };
 

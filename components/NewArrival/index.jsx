@@ -28,7 +28,7 @@ const NewArrival = () => {
     getData();
   }, []);
 
-  console.log(data, '#########')
+  console.log(data, "#########");
 
   return (
     <section className="new-arrival">
@@ -72,7 +72,7 @@ const NewArrival = () => {
               {data?.products?.map((item) => (
                 <SwiperSlide key={item?.id}>
                   <Link
-                    href={`catalog/${item.id}`}
+                    href={`product/${item?.slug}`}
                     className="swiper__img-wrap"
                   >
                     <div className="swiper__img">
@@ -84,7 +84,10 @@ const NewArrival = () => {
                       />
                     </div>
                   </Link>
-                  <Link className="swiper__title" href={`catalog/${item.id}`}>
+                  <Link
+                    className="swiper__title"
+                    href={`product/${item?.slug}`}
+                  >
                     <p className="swiper__title-block">
                       {language == "uz"
                         ? item?.name_uz

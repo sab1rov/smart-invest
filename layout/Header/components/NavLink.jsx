@@ -15,22 +15,27 @@ const NavLink = ({ item }) => {
         {language == "uz" ? name_uz : language == "ru" ? name_ru : name}
       </p>
 
-      <div className="nav-sub" ref={showDiv}>
-        <ul className="nav-sub__wrap">
-          {catalogs?.map((item) => (
-            <li key={item?.id} className="nav-sub__item" onClick={closeModal}>
-              <Link href={item?.api_name} className="nav-sub__link nav__link">
-                <ArrowlineIcon />
-                {language == "uz"
-                  ? item?.name_uz
-                  : language == "ru"
-                  ? item?.name_ru
-                  : item?.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {catalogs.length > 0 && (
+        <div className="nav-sub" ref={showDiv}>
+          <ul className="nav-sub__wrap">
+            {catalogs?.map((item) => (
+              <li key={item?.id} className="nav-sub__item" onClick={closeModal}>
+                <Link
+                  href={`catalog/${item?.api_name}`}
+                  className="nav-sub__link nav__link"
+                >
+                  <ArrowlineIcon />
+                  {language == "uz"
+                    ? item?.name_uz
+                    : language == "ru"
+                    ? item?.name_ru
+                    : item?.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </li>
   );
 };

@@ -23,11 +23,12 @@
     display: flex;
     @include adaptive-value("gap", 40, 20, 1);
     .icons-item {
-      @include flex();
       font-size: 22px;
       color: $mainColor;
       cursor: pointer;
-      transition: $transition;
+      &:hover{
+        color: $hoverColor;
+      }
       &_close {
         display: none;
         &.active {
@@ -43,11 +44,7 @@
     svg {
       width: 30px;
       height: 30px;
-      &:hover {
-        path {
-          stroke: $hoverColor;
-        }
-      }
+      transition: $transition;
     }
     @include media(550) {
       width: 100%;

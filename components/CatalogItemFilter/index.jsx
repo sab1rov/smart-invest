@@ -12,6 +12,8 @@ const CatalogItemFilter = () => {
   const { language } = useContext(LanguageContext);
   const translate = useLanguage();
   const router = useRouter();
+  console.log(router);
+  let query = router.asPath.split("?")[1] ? router.asPath.split("?")[1] : "";
 
   const catalog = useRef();
 
@@ -37,43 +39,48 @@ const CatalogItemFilter = () => {
     seFabricrData(res.data);
   };
 
-  const includeQueryBoolen = (name, key) =>  {
-    if(router.query[name]) {
-      let arrQuery = router.query[name].split(',')
-      return arrQuery.includes(key)
-
-    }else {
-      return false
+  const includeQueryBoolen = (name, key) => {
+    if (router.query[name]) {
+      let arrQuery = router.query[name].split(",");
+      return arrQuery.includes(key);
+    } else {
+      return false;
     }
-  }
+  };
 
-  function handleChangePrint(key, name ) {
+  function handleChangePrint(key, name) {
     if (!!router.query[name]) {
-      let arrQuery = router.query[name].split(',')
-      if(arrQuery.includes(key)) {
-        arrQuery =  arrQuery.filter(item => item !== key) 
-      }else{
-        arrQuery.push(key)
+      let arrQuery = router.query[name].split(",");
+      if (arrQuery.includes(key)) {
+        arrQuery = arrQuery.filter((item) => item !== key);
+      } else {
+        arrQuery.push(key);
       }
-      
-      const queryString = arrQuery.join(',')
+
+      const queryString = arrQuery.join(",");
       router.query[name] = queryString;
       router.push(router);
-      
-      
     } else {
       router.query[name] = key;
       router.push(router);
     }
-
   }
 
+  const getAllProducts = async () => {
+    const res = await axios.get(
+      `https://smart-api-v2.main-gate.appx.uz/product?${query}`
+    );
+  };
 
   useEffect(() => {
     getColorData();
     getFabricData();
     getPrintData();
   }, []);
+
+  useEffect(() => {
+    getAllProducts();
+  }, [query]);
 
   return (
     <main className="main">
@@ -99,13 +106,15 @@ const CatalogItemFilter = () => {
                           <li key={item.id} className="filter-list__item">
                             <label className="checkbox-label">
                               <input
-                                // onClick={(e) => setPath(e)}
                                 type="checkbox"
                                 className="checkbox"
-                                onChange={() => handleChangePrint(item?.print , 'print')}
-                                checked={
-                                  includeQueryBoolen('print' , item.print)
+                                onChange={() =>
+                                  handleChangePrint(item?.print, "print")
                                 }
+                                checked={includeQueryBoolen(
+                                  "print",
+                                  item.print
+                                )}
                               />
                               <span className="checkbox-check"></span>
                               {language == "uz"
@@ -126,8 +135,14 @@ const CatalogItemFilter = () => {
                             <label className="checkbox-label">
                               <input
                                 type="checkbox"
-                                name="filter-new"
                                 className="checkbox"
+                                onChange={() =>
+                                  handleChangePrint(item?.color, "color")
+                                }
+                                checked={includeQueryBoolen(
+                                  "color",
+                                  item?.color
+                                )}
                               />
                               <span
                                 className="checkbox-check color"
@@ -153,8 +168,14 @@ const CatalogItemFilter = () => {
                             <label className="checkbox-label">
                               <input
                                 type="checkbox"
-                                name="filter-new"
                                 className="checkbox"
+                                onChange={() =>
+                                  handleChangePrint(item?.fabric, "fabric")
+                                }
+                                checked={includeQueryBoolen(
+                                  "fabric",
+                                  item?.fabric
+                                )}
                               />
                               <span className="checkbox-check"></span>
                               {language == "uz"

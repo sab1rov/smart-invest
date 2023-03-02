@@ -1,103 +1,56 @@
-export const printData = [
+import FirstImg from "../assets/Images/gidrosko.svg";
+import SecondImg from "../assets/Images/care.svg";
+import ThirdImg from "../assets/Images/natural.svg";
+import FourthImg from "../assets/Images/eco.svg";
+
+export const sizeData = [
   {
     id: 1,
-    name: "Rotary",
-    name_ru: "Ротационная",
-    name_uz: "Aylanadigan",
+    name: "pillowcase 50x70 cm 2 pc",
+    name_ru: "наволочка 50x70 cm 2 шт",
+    name_uz: "Yostiq sumkasi 50x70 cm 2 шт",
   },
   {
     id: 2,
-    name: "Digital",
-    name_ru: "Цифровая",
-    name_uz: "Raqamli",
+    name: "Sheet 150х215 cm 1 pc",
+    name_ru: "Простынь 150х215 cm 1 шт",
+    name_uz: "Choyshab 150х215 cm 1 шт",
   },
   {
     id: 3,
-    name: "Dyed",
-    name_ru: "Гладкокрашение",
-    name_uz: "Bo'yalgan",
-  },
-];
-export const textileData = [
-  {
-    id: 1,
-    name: "Poplin",
-    name_ru: "Попплин",
-    name_uz: "Poplin",
-  },
-  {
-    id: 2,
-    name: "Calico",
-    name_ru: "Бязь",
-    name_uz: "Kaliko",
-  },
-  {
-    id: 3,
-    name: "Twill",
-    name_ru: "Диагональ",
-    name_uz: "Diaganal",
-  },
-  {
-    id: 4,
-    name: "Sateen",
-    name_ru: "Сатин",
-    name_uz: "Saten",
+    name: "Duvet cover 145х215 cm 1 pc",
+    name_ru: "Пододеяльник 145х215 cm 1 шт",
+    name_uz: "Ko'rpa-to'shak 145х215 cm 1 шт",
   },
 ];
 
-export const colorData = [
+export const featureData = [
   {
     id: 1,
-    name: "Biege",
-    name_ru: "Бежать",
-    name_uz: "Bej",
+    image: FirstImg,
+    name: "Hygroscopicity",
+    name_ru: "Гигроскопичность",
+    name_uz: "Gigroskopiklik",
   },
   {
     id: 2,
-    name: "Blue",
-    name_ru: "Синий",
-    name_uz: "Ko'k",
+    image: SecondImg,
+    name: "Easy care",
+    name_ru: "Легкий уход",
+    name_uz: "Oson parvarish",
   },
   {
     id: 3,
-    name: "Brown",
-    name_ru: "Jigarrang",
-    name_uz: "Коричневый",
+    image: ThirdImg,
+    name: "Natural fabric",
+    name_ru: "Натуральная ткань",
+    name_uz: "Tabiiy mato",
   },
   {
     id: 4,
-    name: "Gray",
-    name_ru: "Серый",
-    name_uz: "Kulrang",
-  },
-  {
-    id: 5,
-    name: "Green",
-    name_ru: "Зеленый",
-    name_uz: "Yashil",
-  },
-  {
-    id: 6,
-    name: "Orange",
-    name_ru: "Oранжевый",
-    name_uz: "To'q sariq",
-  },
-  {
-    id: 7,
-    name: "Pink",
-    name_ru: "Розовый",
-    name_uz: "Pushti",
-  },
-  {
-    id: 8,
-    name: "Purple",
-    name_ru: "Фиолетовый",
-    name_uz: "Soyohrang",
-  },
-  {
-    id: 9,
-    name: "Violet",
-    name_ru: "Фиолетовый",
-    name_uz: "Binafsha",
+    image: FourthImg,
+    name: "EcoProduct",
+    name_ru: "ЭкоПродукт",
+    name_uz: "Ekologik mahsulot",
   },
 ];
