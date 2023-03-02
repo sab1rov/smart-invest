@@ -28,8 +28,6 @@ const NewArrival = () => {
     getData();
   }, []);
 
-  console.log(data, "#########");
-
   return (
     <section className="new-arrival">
       <div className="container" style={{ overflow: "hidden" }}>

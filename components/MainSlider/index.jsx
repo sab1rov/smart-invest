@@ -40,7 +40,6 @@ const MainSlider = () => {
           }}
           effect={"fade"}
           loop={true}
-          loopFillGroupWithBlank={true}
           pagination={{ clickable: true }}
         >
           {data.map((item) => (

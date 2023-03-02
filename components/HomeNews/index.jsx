@@ -54,7 +54,7 @@ const HomeNews = () => {
             >
               {data.map((item) => (
                 <SwiperSlide key={item?.id}>
-                  <Link href="#" className="swiper__img-wrap">
+                  <Link href={`news/${item?.id}`} className="swiper__img-wrap">
                     <div className="swiper__img">
                       <Image
                         src={item?.image_url}
@@ -64,7 +64,7 @@ const HomeNews = () => {
                       />
                     </div>
                   </Link>
-                  <Link className="swiper__title" href="#">
+                  <Link className="swiper__title" href={`news/${item?.id}`}>
                     <p className="swiper__title-block">
                       {language == "uz"
                         ? item?.title_uz
